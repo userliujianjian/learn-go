@@ -1,0 +1,5 @@
+package types
+
+func ArrayExample() {
+
+}

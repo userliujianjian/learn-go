@@ -1,5 +1,18 @@
 ### 数据类型
 
+- #### 切片
+  切片（slice）是一个拥有相同元素类型的可变长度的序列。它是基于数组类型做的一层封装。非常灵活支持自动扩容。  
+
+源码定义如下：
+```go
+type slice struct {
+	array unsafe.Pointer // 元素指针
+	len int // 实际元素个数
+	cap int // 容量
+}
+```
+#### 切片[结构图](img/slice-data-type.png)
+
 - ### 常见问题
 #### Q1：切片与数组有什么区别?
 > 数组是一个长度固定的数据类型，其长度在声明时就已经确定，不能动态改变；
@@ -30,7 +43,7 @@ func main(){
   源码定义如下：
   ```go
     type slice struct {
-        array unsafe.Pointer
+        array unsafe.Pointer // 指针
         len int // 实际元素个数
         cap int // 容量
     }

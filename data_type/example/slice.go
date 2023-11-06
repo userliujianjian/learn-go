@@ -1,6 +1,19 @@
 package example
 
-import "fmt"
+import (
+	"fmt"
+)
+
+/*
+slice底层数据是数组，slice是对数组的封装，他描述一个数组的片段。两者都可通过下标来访问单个元素
+*/
+
+// 切片底层数据结构 runtime/slice.go
+//type slice struct {
+//	array unsafe.Pointer // 元素指针
+//	len int // 长度
+//	cap int // 容量
+//}
 
 func SliceVar() {
 	var nums []int                    // 生命切片

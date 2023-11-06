@@ -19,68 +19,58 @@ type slice struct {
 
 - 数组示例
 ```go
-func Add(numbers [5]int){
-for i :=0; i < len(numbers); i++ {
-numbers[i] = numbers[i] + 1
-}
-// 如果数组作为函数的参数，那么实际传递的是一份数组的拷贝，而不是数组的指针。这也就意味着，在函数中修改数组的元素不会影响到原始数组
-fmt.Println("numbers in Add:", numbers) // [2,3,4,5,6]
+func Add(numbers [5]int) {
+	for i := 0; i < len(numbers); i++ {
+		numbers[i] = numbers[i] + 1
+	}
+	fmt.Println("numbers in Add:", numbers) // [2,3,4,5,6]
 }
 
-func main(){
-var numbers [5]int
-for i := 0; i < len(numbers); i++ {
-numbers[i] = i + 1
-}
-Add(numbers)
-// 如果数组作为函数的参数，那么实际传递的是一份数组的拷贝，而不是数组的指针。这也就意味着，在函数中修改数组的元素不会影响到原始数组
-fmt.Println("numbers in main: ", numbers) // [1,2,3,4,5]
-}
-```
-#### 切片
-切片（slice）是一个拥有相同元素类型的可变长度的序列。它是基于数组类型做的一层封装。非常灵活支持自动扩容。
-源码定义如下：
-```go
-type slice struct {
-array unsafe.Pointer // 指针
-len int // 实际元素个数
-cap int // 容量
+func main() {
+	var numbers [5]int
+	for i := 0; i < len(numbers); i++ {
+		numbers[i] = i + 1
+	}
+	Add(numbers)
+	// 如果数组作为函数的参数，那么实际传递的是一份数组的拷贝，而不是数组的指针。这也就意味着，在函数中修改数组的元素不会影响到原始数组
+	fmt.Println("numbers in main: ", numbers) // [1,2,3,4,5]
 }
 ```
+
 
 - 切片示例
 ```go
 import "fmt"
 
 func SliceVar() {
-var nums []int                    // 生命切片
-fmt.Println(len(nums), cap(nums)) // 0, 0
-nums = append(nums, 1)            // 初始化
-fmt.Println(len(nums), cap(nums)) // 1, 1
+	var nums []int                    // 生命切片
+	fmt.Println(len(nums), cap(nums)) // 0, 0
+	nums = append(nums, 1)            // 初始化
+	fmt.Println(len(nums), cap(nums)) // 1, 1
 
-nums1 := []int{1, 2, 3, 4}          // 生命并初始化
-fmt.Println(len(nums1), cap(nums1)) // 4 4
+	nums1 := []int{1, 2, 3, 4}          // 生命并初始化
+	fmt.Println(len(nums1), cap(nums1)) // 4 4
 
-nums2 := make([]int, 3, 5)          // 使用make函数构造切片
-fmt.Println(len(nums2), cap(nums2)) // 3 5
+	nums2 := make([]int, 3, 5)          // 使用make函数构造切片
+	fmt.Println(len(nums2), cap(nums2)) // 3 5
 
 }
 
 func SliceFunc(numbers []int) {
-for i := 0; i < len(numbers); i++ {
-numbers[i] = numbers[i] + 1
-}
-fmt.Println("numbers is SliceFunc: ", numbers) // [2 3 4 5 6]
+	for i := 0; i < len(numbers); i++ {
+		numbers[i] = numbers[i] + 1
+	}
+	fmt.Println("numbers is SliceFunc: ", numbers) // [2 3 4 5 6]
 }
 
 func SliceMain() {
-var numbers []int
-for i := 0; i < 5; i++ {
-numbers = append(numbers, i+1)
-}
-SliceFunc(numbers)
-// 切片被当作参数传递时，直接修改的是切片本身
-fmt.Println("numbers in main: ", numbers) // [2 3 4 5 6]
+	var numbers []int
+	for i := 0; i < 5; i++ {
+		numbers = append(numbers, i+1)
+	}
+	SliceFunc(numbers)
+	// 切片被当作参数传递时，直接修改的是切片本身
+	fmt.Println("numbers in main: ", numbers) // [2 3 4 5 6]
 }
 ```
 

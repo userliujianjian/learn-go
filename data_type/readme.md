@@ -11,7 +11,8 @@ type slice struct {
 	cap int // 容量
 }
 ```
-#### 切片[结构图](img/slice-data-type.png)
+#### 切片结构图。
+![结构图](img/slice-data-type.png)
 
 - ### 常见问题
 #### Q1：切片与数组有什么区别?

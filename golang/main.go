@@ -1,6 +1,6 @@
 package main
 
-import "lear-go/data_type/example"
+import "lear-go/golang/example"
 
 func main() {
 	// 数组代码用例

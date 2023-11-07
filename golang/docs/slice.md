@@ -41,14 +41,14 @@ func main() {
 - 切片示例
 ```go
 import "fmt"
-
+// 声明方式
 func SliceVar() {
-	var nums []int                    // 生命切片
+	var nums []int                    // 声明切片
 	fmt.Println(len(nums), cap(nums)) // 0, 0
 	nums = append(nums, 1)            // 初始化
 	fmt.Println(len(nums), cap(nums)) // 1, 1
 
-	nums1 := []int{1, 2, 3, 4}          // 生命并初始化
+	nums1 := []int{1, 2, 3, 4}          // 声明并初始化
 	fmt.Println(len(nums1), cap(nums1)) // 4 4
 
 	nums2 := make([]int, 3, 5)          // 使用make函数构造切片

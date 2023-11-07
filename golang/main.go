@@ -9,4 +9,5 @@ func main() {
 	example.ArrayExample()
 	example.SliceVar()
 	example.SliceMain()
+	example.SliceTest()
 }

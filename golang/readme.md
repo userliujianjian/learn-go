@@ -1,4 +1,4 @@
 ### 数据类型
 
-- [切片](docs/slice.md)
-- [数组](docs/array.md)
+- [数组与切片有什么异同](docs/slice-array.md)
+- [切片的容量是怎么增长的](docs/slice-cap.md)

@@ -10,4 +10,7 @@ func main() {
 	example.SliceVar()
 	example.SliceMain()
 	example.SliceTest()
+	example.SliceCapAddr()
+	example.SliceCap()
+	example.SliceCapPlug()
 }

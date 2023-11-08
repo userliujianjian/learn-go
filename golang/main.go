@@ -13,4 +13,6 @@ func main() {
 	example.SliceCapAddr()
 	example.SliceCap()
 	example.SliceCapPlug()
+	// 切片作为参数
+	example.SliceParam()
 }

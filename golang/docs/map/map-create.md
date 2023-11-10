@@ -16,11 +16,11 @@ map 最主要的数据结构有两种： 哈希查找表（hash table）, 搜索
 #### map的底层如何实现
 前面说了map的几种方案，go语言采用的是`哈希查找表`，并使用`链表法`解决哈希冲突
 
-#### map 内存模型(go version go1.21.3)
+#### map 内存模型
 ![map内存模型](../img/map-1.png)  
 在源码中表示map的结构体是hmap，它是hashmap的缩写
 ```go 
-// runtime/map.go
+// runtime/map.go (go version go1.21.3)
 
 // A header for a Go map.
 type hmap struct {
@@ -86,6 +86,187 @@ type mapextra struct {
 
 bmap 是存放 k-v 的地方，我们把视角拉近，仔细看 bmap 的内部组成。
 ![bmap内部组成](../img/map-2.png)
+
+上图就是bucket内存模型，`Hob Hash` 指的就是top hash。  
+注意key和value是各自放在一起，并不是k/v/k/v...这样的形式，为什么不是k/v/k/v呢？
+	如果按照 k/v/k/v...这样的模式存储，那在每一个k/v键值对之后都要额外pending 7个字节；而将所有key，value分别绑定到一起，则只需要在最后添加pending。  
+	每个bucket设计成最多只能放8个k-v，如果有第9个 k-v 落入当前的bucket，那就需要再构建一个bucket，通过overflow指针连起来。
+
+#### 创建map
+从语法上说创建map很简单：
+```go
+
+func main() {
+	ageMp := make(map[string]int)
+	// 指定map长度
+	ageMp2 := make(map[string]int, 8)
+
+	// ageMp3 为nil，不能向其添加元素，会直接panic
+	var ageMp3 map[string]int
+
+	fmt.Println(ageMp, ageMp2, ageMp3)
+}
+```
+通过汇编语言可以看到，是加上底层调用的是makemap函数，主要做的工作就是初始化hmap结构体的各种字段。
+```go
+// (go version go1.21.3)
+// makemap 为 make(map[k]v,hint) 实现 Go 映射创建。
+// 如果编译器确定是map还是第一个bucket
+// 可以在堆栈上创建，h 和/或bucket 可以为非零。
+// 如果h != nil，则可以直接在h中创建map。
+// 如果h.buckets != nil，则指向的bucket可以作为第一个bucket。
+func makemap(t *maptype, hint int, h *hmap) *hmap {
+	mem, overflow := math.MulUintptr(uintptr(hint), t.Bucket.Size_)
+	if overflow || mem > maxAlloc {
+		hint = 0
+	}
+
+	// initialize Hmap
+	if h == nil {
+		h = new(hmap)
+	}
+	h.hash0 = fastrand()
+
+	// 找到将保存所请求的元素数量的大小参数 B。
+	// 对于提示 < 0，overLoadFactor 返回 false，因为提示 < bucketCnt。
+	B := uint8(0)
+	for overLoadFactor(hint, B) {
+		B++
+	}
+	h.B = B
+
+	// 分配初始哈希表
+	// 如果 B == 0，buckets 字段稍后会被延迟分配（在 mapassign 中）
+	// 如果提示很大，则清零此内存可能需要一段时间。
+	if h.B != 0 {
+		var nextOverflow *bmap
+		h.buckets, nextOverflow = makeBucketArray(t, h.B, nil)
+		if nextOverflow != nil {
+			h.extra = new(mapextra)
+			h.extra.nextOverflow = nextOverflow
+		}
+	}
+
+	return h
+}
+
+```
+
+### **key定位过程**
+![map key定位过程](../img/map-3.png)
+将key通过哈希函数转成哈希值，共64bit位（64位操作系统），计算到他要落在哪个bucket桶中
+  - 用后5个bit位，找到是哪个桶`00110`找到对应的6号bucket
+  - 使用高8位bit，`10010111` 对应十进制就是151，在6号bucket中寻找 top hash值为151的key， 找到2号槽位 查找结束。
+  - 如果在bucket中没有找到，并且overflow不为空，就去overflow bucket中找，直到bucket所有槽位都找遍
+
+让我们来看下源码，这里我们直接看 `mapaccess1`函数
+```go
+func mapaccess1(t *maptype, h *hmap, key unsafe.Pointer) unsafe.Pointer {
+	// ……
+	
+	// 如果 h 什么都没有，返回零值
+	if h == nil || h.count == 0 {
+		return unsafe.Pointer(&zeroVal[0])
+	}
+	
+	// 写和读冲突
+	if h.flags&hashWriting != 0 {
+		throw("concurrent map read and map write")
+	}
+	
+	// 不同类型 key 使用的 hash 算法在编译期确定
+	alg := t.key.alg
+	
+	// 计算哈希值，并且加入 hash0 引入随机性
+	hash := alg.hash(key, uintptr(h.hash0))
+	
+	// 比如 B=5，那 m 就是31，二进制是全 1
+	// 求 bucket num 时，将 hash 与 m 相与，
+	// 达到 bucket num 由 hash 的低 8 位决定的效果
+	m := uintptr(1)<<h.B - 1
+	
+	// b 就是 bucket 的地址
+	b := (*bmap)(add(h.buckets, (hash&m)*uintptr(t.bucketsize)))
+	
+	// oldbuckets 不为 nil，说明发生了扩容
+	if c := h.oldbuckets; c != nil {
+	    // 如果不是同 size 扩容（看后面扩容的内容）
+	    // 对应条件 1 的解决方案
+		if !h.sameSizeGrow() {
+			// 新 bucket 数量是老的 2 倍
+			m >>= 1
+		}
+		
+		// 求出 key 在老的 map 中的 bucket 位置
+		oldb := (*bmap)(add(c, (hash&m)*uintptr(t.bucketsize)))
+		
+		// 如果 oldb 没有搬迁到新的 bucket
+		// 那就在老的 bucket 中寻找
+		if !evacuated(oldb) {
+			b = oldb
+		}
+	}
+	
+	// 计算出高 8 位的 hash
+	// 相当于右移 56 位，只取高8位
+	top := uint8(hash >> (sys.PtrSize*8 - 8))
+	
+	// 增加一个 minTopHash
+	if top < minTopHash {
+		top += minTopHash
+	}
+	for {
+	    // 遍历 bucket 的 8 个位置
+		for i := uintptr(0); i < bucketCnt; i++ {
+		    // tophash 不匹配，继续
+			if b.tophash[i] != top {
+				continue
+			}
+			// tophash 匹配，定位到 key 的位置
+			k := add(unsafe.Pointer(b), dataOffset+i*uintptr(t.keysize))
+			// key 是指针
+			if t.indirectkey {
+			    // 解引用
+				k = *((*unsafe.Pointer)(k))
+			}
+			// 如果 key 相等
+			if alg.equal(key, k) {
+			    // 定位到 value 的位置
+				v := add(unsafe.Pointer(b), dataOffset+bucketCnt*uintptr(t.keysize)+i*uintptr(t.valuesize))
+				// value 解引用
+				if t.indirectvalue {
+					v = *((*unsafe.Pointer)(v))
+				}
+				return v
+			}
+		}
+		
+		// bucket 找完（还没找到），继续到 overflow bucket 里找
+		b = b.overflow(t)
+		// overflow bucket 也找完了，说明没有目标 key
+		// 返回零值
+		if b == nil {
+			return unsafe.Pointer(&zeroVal[0])
+		}
+	}
+}
+```
+函数返回h[key]的指针，如果h中没有此key，那就会返回一个key相应类型的零值，不会返回nil
+
+源码中定位key和value的方法以及整个循环
+```go
+// key 定位公式
+k := add(unsafe.Pointer(b), dataOffset+i*uintptr(t.keysize))
+
+// value 定位公式
+v := add(unsafe.Pointer(b), dataOffset+bucketCnt*uintptr(t.keysize)+i*uintptr(t.valuesize))
+```
+![循环示例](../img/map-4.png)
+
+<!-- TODO 源代码如何查找这一块逻辑没有搞明白，后续补上 -->
+
+参考文章：
+https://golang.design/go-questions/map/principal/
 
 
 

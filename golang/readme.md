@@ -6,3 +6,7 @@
 - [切片作为函数参数](docs/slice/slice-param.md)
 
 ### 哈希map
+- [map实现原理](docs/map/map-create.md)
+- [如何实现get操作](docs/map/map-get.md)
+- [float类型可以作为map的key嘛](docs/map/map-float-key.md)
+- [常见问题](docs/map/map.md)

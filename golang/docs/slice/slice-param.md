@@ -43,4 +43,6 @@ func SliceAppend(s []int) []int {
 而s1 是一个新的slice，它基于s得到的，因此打印结果[0 0 0 100], 虽然容量没有改变，但是底层数据指针已经发生改变。  
 
 
+参考文章：
+https://golang.design/go-questions/slice/as-func-param/
 

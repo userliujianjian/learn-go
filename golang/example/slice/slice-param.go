@@ -1,8 +1,8 @@
-package example
+package slice
 
 import "fmt"
 
-func SliceParam() {
+func Param() {
 	exp1()
 	exp2()
 }

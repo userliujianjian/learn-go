@@ -6,4 +6,7 @@ func Init() {
 
 	sayHello(dog)
 	sayHello(cat)
+	// 值传递
+	pointerExp()
+	usedTest()
 }

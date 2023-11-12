@@ -10,3 +10,8 @@
 - [如何实现get操作](docs/map/map-get.md)
 - [float类型可以作为map的key嘛](docs/map/map-float-key.md)
 - [常见问题](docs/map/map.md)
+
+
+### 接口
+- [GO语言与鸭子类型的关系](docs/inter/duck.md)
+- [值接受这和指针接受着的区别](docs/inter/duck.md)

@@ -14,4 +14,4 @@
 
 ### 接口
 - [GO语言与鸭子类型的关系](docs/inter/duck.md)
-- [值接受这和指针接受着的区别](docs/inter/duck.md)
+- [值接受这和指针接受着的区别](docs/inter/pointer.md)

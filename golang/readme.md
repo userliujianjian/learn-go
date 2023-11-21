@@ -15,3 +15,9 @@
 ### 接口
 - [GO语言与鸭子类型的关系](docs/inter/duck.md)
 - [值接受这和指针接受着的区别](docs/inter/pointer.md)
+
+
+### 通道
+- [channel的底层数据结构是什么](docs/inter/channel.md)
+- [什么是csp](docs/inter/csp.md)
+- [Goroutine泄漏](docs/inter/channel-buf.md)

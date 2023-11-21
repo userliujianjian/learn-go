@@ -18,6 +18,6 @@
 
 
 ### 通道
-- [channel的底层数据结构是什么](docs/inter/channel.md)
-- [什么是csp](docs/inter/csp.md)
-- [Goroutine泄漏](docs/inter/channel-buf.md)
+- [channel的底层数据结构是什么](docs/ch/channel.md)
+- [什么是csp](docs/ch/csp.md)
+- [Goroutine泄漏](docs/ch/channel-buf.md)

@@ -37,7 +37,7 @@ type ApiDbData struct {
 type AppData struct {
 	UserDataMap          map[string]map[string]*APIKey
 	Queue                []*ApiDbData
-	Mutex                sync.Mutex
+	Mutex                *sync.Mutex
 	LastQueueProcessTime time.Time
 }
 

@@ -15,6 +15,7 @@
 ### 接口
 - [GO语言与鸭子类型的关系](docs/inter/duck.md)
 - [值接受这和指针接受着的区别](docs/inter/pointer.md)
+- [iface和eface的区别是什么](docs/inter/face.md)
 
 
 ### 通道
@@ -27,6 +28,11 @@
 - [context使用](docs/lib/context.md)
 - [context源码](docs/lib/context-2.md)
 
+### 解释器
+- [GMP](docs/schedule/gmp.md)
+
+### 垃圾回收
+- [GC垃圾回基础概念](docs/gc/gc.md)
 
 TODO：
 调度器：GMP模型

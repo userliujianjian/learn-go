@@ -124,7 +124,8 @@ func main(){
 #### 清单7
 ```go
 func(t *Tracker) Shutdown(ctx context.Context) error{
-	ch := make(chan struct{})
+	// 此处为缓冲为1的通道，是因为当ctx.Done()之后， close(ch)时，通道已关闭，无法接受数据，导致go func panic错误
+	ch := make(chan struct{}, 1)
 	go func(){
 		t.wg.Wait()
 		close(ch)
@@ -155,4 +156,7 @@ err := a.track.Shutdown(ctx)
 #### 结论
 
 随着Goroutine的引入，该服务器处理程序能够最大限度的减少跟踪事件的Api客户端延迟成本。Go只需要使用关键字在后台运行这项工作就很容易，但该方案存在完整性问题，正确的做到这一点需要努力通过保存所有相关goroutine再让程序关闭之前终止。
+
+
+
 

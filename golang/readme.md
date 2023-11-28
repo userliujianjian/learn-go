@@ -35,5 +35,5 @@
 - [GC垃圾回基础概念](docs/gc/gc.md)
 
 TODO：
-调度器：GMP模型
+调度器：GMP模型  
 垃圾回收：GOLANG垃圾回收机制

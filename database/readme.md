@@ -1,5 +1,5 @@
 ## MYSQL相关问题
-![数据库纵览](../img/mysql.png)
+![数据库纵览](img/mysql.png)
 
 ### 导航
 - [索引](docs/indexes.md)

@@ -38,7 +38,7 @@
 	- ### 垃圾回收
 		- [GC垃圾回基础概念](docs/gc/gc.md)
 
-- ### [数据库](database/docs/readme.md)
+- ### [数据库](database/readme.md)
 	- #### 索引
 		- [数据库索引](database/docs/indexes.md)
 		- [最左侧原则](database/docs/index_match_left.md)

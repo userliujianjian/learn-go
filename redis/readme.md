@@ -1,6 +1,6 @@
 ### Redis
 
-![Redis](img/redis.png)
+![Redis](docs/img/redis.png)
 
 [Redis高可用](docs/availability.md)
 [Redis数据结构](docs/data_struct.md)

@@ -149,7 +149,7 @@
 	- 可能是出于性能考虑。Sentinel 可以单独部署，那么 Sentinel 在选举 leader，挑选主节点的时候，并不会影响到 Redis 数据集群的性能。
 
 
-
+参考文章：https://github.com/flycash/interview-baguwen/blob/main/redis/availability.md
 
 
 

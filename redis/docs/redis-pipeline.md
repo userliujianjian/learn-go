@@ -55,4 +55,4 @@
 	- 什么时候选择 Redis Pipeline
 	- 什么时候选择 mget
 	
-
+参考文章：https://github.com/flycash/interview-baguwen/blob/main/redis/pipeline.md

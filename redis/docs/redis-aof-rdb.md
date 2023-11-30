@@ -126,4 +126,4 @@
 	- 要考虑分布式锁持久化的问题。假定我一个线程拿到了分布式锁，那么如果这个锁没有被持久化，那么如果 Redis 崩溃立刻重启，那么下一个线程立马就能拿到锁。
 	- 所以在考虑这种场景下，万无一失的方案，就是开启 AOF 持久化，并且将刷盘时机设置成always
 
-
+参考文章：https://github.com/flycash/interview-baguwen/blob/main/redis/persistent.md

@@ -75,4 +75,4 @@
 	- 它可以存放16、32、64位的整数。如果元素位数变大，那么就会触发升级过程（例如原本存储的元素都是16位整数，现在插入一个32位的整数，那么 Redis 需要按照32位重新计算内存大小，并且分配内存，迁移原本的数据，而后将新数据插入）
 	- 有一点需要注意的是，Redis并不支持降级
 	
-
+参考文章：https://github.com/flycash/interview-baguwen/blob/main/redis/data_structure.md

@@ -46,3 +46,9 @@
 	- ### 事务
 		- [事物](docs/transaction.md)
 
+- ### [Redis](redis/readme.md)
+	- [Redis高可用](redis/docs/availability.md)
+	- [Redis数据结构](redis/docs/data_struct.md)
+	- [Redis持久化机制](redis/docs/redis-aof-rdb.md)
+	- [Redis批量处理命令](redis/docs/redis-pipeline.md)
+

@@ -6,7 +6,7 @@
 
 
 #### HTTP：
-![HTTP](img/http.png)
+![HTTP](docs/img/http.png)
 
 #### TCP：
-![TCP](img/tcp.png)
+![TCP](docs/img/tcp.png)

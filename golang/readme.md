@@ -33,3 +33,6 @@
 
 ### 垃圾回收
 - [GC垃圾回基础概念](docs/gc/gc.md)
+
+### 常见面试题
+- [概念题](docs/ch/ch-question.md)

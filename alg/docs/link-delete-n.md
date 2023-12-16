@@ -35,7 +35,7 @@
 		- 具体的：初始时first和second均指向头节点。我们线使用first进行遍历n次，**first和second之间间隔n-1个节点**，即first比second超前了n个节点（ps：一定要理解**间隔2个节点**相当于**超了3个节点**，也可以理解为3步）
 		- 在这之后，我们同时使用first和second对链表进行便利。当first遍历到末尾（空指针），second恰好**指向**倒数第n个节点
 		- 时间复杂度：O(L)，其中 L 是链表的长度。
-		- 空间复杂度：O(1)。
+		- 空间复杂度：O(1)。  
 ```go
 /**
  * Definition for singly-linked list.
@@ -67,6 +67,36 @@ func removeNthFromEnd(head *ListNode, n int) *ListNode {
 
 - 答案（栈）：
 - 解题思路：
-	- 
+	- 我们也可以在便利链表的同时将所有节点依次入栈。根据先进后出原则，我们弹出n个节点就是需要删除的节点，并且目前栈顶的节点就是带删除节点的钱去节点。这样一来，删除操作就变的十分方便了（PS：**记得栈内每个元素都是相互连接的，删除前驱节点的后一个节点就可以了。考虑到删除第一个节点时没有前驱节点，那就给它加一个**）
+
+- 复杂度：
+	- 时间复杂度O(L), 其中L时链表长度
+	- 空间复杂度：O(L), 其中L是链表长度，主要为栈开销
+
+```go
+/**
+ * Definition for singly-linked list.
+ * type ListNode struct {
+ *     Val int
+ *     Next *ListNode
+ * }
+ */
+func removeNthFromEnd(head *ListNode, n int) *ListNode {
+    if (head == nil) || (n == 1 && head.Next == nil) {
+        return nil
+    }
+    // 初始first 和second均指向头节点，首先使用first对链表进行遍历，遍历次数为n，此时first和second之间间隔n-1个节点
+    dummp := &ListNode{0, head}
+    buckets := []*ListNode{}
+    for node := dummp; node != nil; node = node.Next {
+        buckets = append(buckets, node)
+    }
+
+    prev := buckets[len(buckets) - n - 1]
+    prev.Next = prev.Next.Next
+    return dummp.Next
+}
+```
+
 
 

@@ -12,4 +12,4 @@
 - **链表**
 	- [两两交换](docs/link-swap.md)
 	- [删除倒数第N个节点](docs/link-delete-n.md)
-	- [右移N个节点]
+	- [右移N个节点](docs/link-roate-right.md)

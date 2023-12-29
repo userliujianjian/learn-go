@@ -102,13 +102,13 @@ func process(term string) error {
 
 然后创建一个无缓冲通道ch，允许goroutines传递该result类型数据。接下来创建了一个Goroutine，调用search并尝试给ch无缓冲通道发送其返回值。
 
-当Goroutine工作时，process函数执行select是，有两种情况，都是通道接收操作。
+当Goroutine工作时，process函数执行select，有两种情况，都是通道接收操作。
 有一个 ctx.Done()通道接收情况，context如果取消（100毫秒持续时间过去），则会执行此情况。如果执行这个case， 那么process会返回一个错误，表明已放弃等待search函数。  
 或者第二个case，从ch通道接收并将值分配给名为result的变量。与之前的顺序实现一样，程序检查并处理错误。如果没有错误程序将打印 received并返回nil以提示成功。
 
 process此重构设置了函数等待search完成的最长持续时间。然而这种实现也造成了潜在的goroutine泄。想想这段代码中goroutine是做什么的； 
 在`ch <- result{record, err}` 它在给通道发送，此通道上会发生阻塞执行，知道另一个goroutine准备好接收该值。  
-在超时的情况下，接收者停止等待从goroutine接收并继续。这将导致Goroutine**永远**阻塞，等待接收者出现，但这种情况永远不会发生。这就是goroutine泄漏的时候
+在超时的情况下，接收者停止等待从goroutine接收并继续。这将导致**Goroutine永远阻塞**，等待接收者出现，但这种情况永远不会发生。这就是goroutine泄漏的时候
 
 
 ### 修复： 腾出一些空间
@@ -131,9 +131,48 @@ Go使启动Goroutine变得简单，但我们有责任明智地使用它们。在
 	- 什么可以阻止它终止？
 **并发是一个有用的工具，但必须谨慎使用**
 ### 扩展
-- 写一段会产生死锁的代码
+- 写一段会产生死锁的代码（提示：同一个goroutine中多次加锁、使用channel一个传入，另一个等待输出，select等待）
 ```go
 // 根据通道的
+func lock(){
+	ch := make(chan int)
+
+	go func(){
+		ch <- 1
+	}()
+
+	go func(){
+		<-ch
+	}()
+
+	select{}
+}
+
+
+func lock2(){
+	var wg sync.WaitGroup
+	var mu sync.Mutex
+
+	wg.Add(1)
+	go func(){
+		defer wg.Done()
+
+		// 在goroutine中先锁住互斥锁
+		mu.Lock()
+		defer mu.Unlock()
+
+		// 尝试再次锁住互斥锁，这回导致死锁
+		mu.Lock()
+
+		fmt.Println("这一行无法被打印")
+
+
+	}()
+
+	wg.Wait()
+
+
+}
 ```
 
 - 写出你知道的并发方式

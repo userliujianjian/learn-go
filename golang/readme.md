@@ -22,6 +22,8 @@
 - [什么是CSP](docs/ch/csp.md)
 - [channel的底层数据结构是什么](docs/ch/channel.md)
 - [Goroutine泄漏](docs/ch/channel-buf.md)
+- [Goroutine泄漏2](docs/goroutine/concurrency-trap-2.md)
+- [Goroutine和GOMAXPROCS](docs/goroutine/goroutines-and-gomaxprocs.md)
 
 
 ### 标准库

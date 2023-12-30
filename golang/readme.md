@@ -24,6 +24,9 @@
 - [Goroutine泄漏](docs/ch/channel-buf.md)
 - [Goroutine泄漏2](docs/goroutine/concurrency-trap-2.md)
 - [Goroutine和GOMAXPROCS](docs/goroutine/goroutines-and-gomaxprocs.md)
+- [并发模型之goroutine的使用时机](docs/goroutine/concurrency.md)
+- [并发模型之谁发起谁负责](docs/goroutine/concurrency-caller.md)
+- [并发模型之开启和关闭](docs/goroutine/concurrency-stop.md)
 
 
 ### 标准库

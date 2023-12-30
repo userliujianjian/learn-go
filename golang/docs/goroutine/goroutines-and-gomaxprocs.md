@@ -189,6 +189,8 @@ a b c d e f g h i j k l m n o p q r s t u v w x y z 1 2 3 4 5 6 7 8 9 10 11 12 1
 
 通道是 Go 中我们编写安全优雅的并发程序的方式，它消除了竞争条件，让编写并发程序再次变得有趣。现在我们知道了 goroutine 是如何工作的、被调度的，并且可以并行运行，通道是我们需要学习的下一件事。
 
+#### 参考文献：
+https://www.ardanlabs.com/blog/2014/01/concurrency-goroutines-and-gomaxprocs.html
 
 
 

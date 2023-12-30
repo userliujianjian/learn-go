@@ -151,3 +151,6 @@ err := a.track.ShutDown(ctx)
 随着goroutines的引入，该服务器处理程序能够最大限度的减少跟踪事件的API客户端的延迟成本。go只需要使用关键字在后台运行这项工作就很容易，但该方案存在完整性问题。正确的做到这一点需要努力保证所有相关的goroutine在让程序关闭之前都已终止。  
 
 **并发是一个有用的工具，但必须谨慎使用。**
+
+#### 参考文献：  
+https://www.ardanlabs.com/blog/2019/04/concurrency-trap-2-incomplete-work.html

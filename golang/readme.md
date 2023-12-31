@@ -28,6 +28,10 @@
 - [并发模型之谁发起谁负责](docs/goroutine/concurrency-caller.md)
 - [并发模型之开启和关闭](docs/goroutine/concurrency-stop.md)
 
+### 内存（待进一步理解）
+- [Go内存模型](docs/goroutine/mem.md)
+- [Go内存屏障](docs/goroutine/memory_barrier.md)
+
 
 ### 标准库
 - [context使用](docs/lib/context.md)

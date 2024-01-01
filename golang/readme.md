@@ -29,8 +29,9 @@
 - [并发模型之开启和关闭](docs/goroutine/concurrency-stop.md)
 
 ### 内存（待进一步理解）
-- [Go内存模型](docs/goroutine/mem.md)
-- [Go内存屏障](docs/goroutine/memory_barrier.md)
+- [Go内存模型](docs/goroutine/memory/mem.md)
+- [Go内存屏障](docs/goroutine/memory/memory_barrier.md)
+- [曹大谈内存重排](docs/goroutine/memory/memory_rerange.md)
 
 
 ### 标准库

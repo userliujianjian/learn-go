@@ -15,7 +15,7 @@
 
 #### CPU重排
 引用参考资料【内存一直模型】里的例子：  
-![memroy-range-1](../../img/memory-range-1.png)
+![memroy-range-1](../../img/memory-range-1.png)  
 在两个线程里同时执行上面的代码，A和B初始化值都是0，那最终的输出是什么呢？
 
 | 执行顺序 | 输出结果 |

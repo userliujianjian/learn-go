@@ -22,5 +22,5 @@
 
 
 #### 2024计划（不断完善中）
-[2024-question](golang/docs/img/onequestion-2024.png)
+![2024-question](golang/docs/img/onequestion-2024.png)
 

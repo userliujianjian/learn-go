@@ -30,6 +30,7 @@
 
 ### 内存（待进一步理解）
 - [曹大谈内存重排](docs/goroutine/memory/memory_rerange.md)
+- [内存重排](docs/goroutine/memory/memory_reordering.md)
 - [Go内存模型（未理解）](docs/goroutine/memory/mem.md)
 - [Go内存屏障（未理解）](docs/goroutine/memory/memory_barrier.md)
 

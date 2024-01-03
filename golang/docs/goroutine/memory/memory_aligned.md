@@ -1,4 +1,4 @@
-## 如果对其的内存写入时原子的，为什么我们需要`sync/atomic`包？
+## 如果对齐的内存写入是原子的，为什么我们需要`sync/atomic`包？
 
 这是一篇受Go论坛上一个问题启发的[帖子](https://forum.golangbridge.org/t/go-test-race-and-uint8-variables/7707)。转述的问题是，“如果处理器保证正确对齐的写入时原子的，为什么竞争检测器会抱怨？”。
 
@@ -24,10 +24,10 @@
 	- 尽管大多数处理器允许对未对齐的读取和写入，但内存上的原子操作要求地址自然对齐，因为处理器之间的通信由缓存处理，缓存根据通常为64字节长的缓存进行操作。***因此未对齐的读取或写入可能跨越两条缓存行，这不可能在处理器之间进行原子同步***。  
 
 #### 参考文章：
-[原文](https://dave.cheney.net/2018/01/06/if-aligned-memory-writes-are-atomic-why-do-we-need-the-sync-atomic-package)
+- [原文：对齐的内存写入是原子的嘛？](https://dave.cheney.net/2018/01/06/if-aligned-memory-writes-are-atomic-why-do-we-need-the-sync-atomic-package)  
 
-[堆栈跟踪和错误包](https://dave.cheney.net/2016/06/12/stack-traces-and-the-errors-package)
-[如何在GO包中包含C代码](https://dave.cheney.net/2013/09/07/how-to-include-c-code-in-your-go-package)
-[为什么我认为Go包管理很重要](https://dave.cheney.net/2013/10/10/why-i-think-go-package-management-is-important)
-[Go不带包范围的变量](https://dave.cheney.net/2017/06/11/go-without-package-scoped-variables)
+- [堆栈跟踪和错误包](https://dave.cheney.net/2016/06/12/stack-traces-and-the-errors-package)  
+- [如何在GO包中包含C代码](https://dave.cheney.net/2013/09/07/how-to-include-c-code-in-your-go-package)  
+- [为什么我认为Go包管理很重要](https://dave.cheney.net/2013/10/10/why-i-think-go-package-management-is-important)  
+- [Go不带包范围的变量](https://dave.cheney.net/2017/06/11/go-without-package-scoped-variables)  
 - 

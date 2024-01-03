@@ -81,5 +81,8 @@ func Poller2(in, out chan *Source) {
 
 前面这些例子中微妙逻辑明显确实，我们的Source数据结构不再抱函记录数据。事实上，剩下的只是重要的部分。这应该让你对这些简单语言功能的强大有所了解。  
 
-上面的代码片段有很多遗漏。有关这些想法的完整惯用Go程序演练，请参阅[Codewalk](https://go.dev/doc/codewalk/sharemem/)通过通信共享内存。
+上面的代码片段有很多遗漏。有关这些想法的完整惯用Go程序演练，请参阅[Codewalk](https://go.dev/doc/codewalk/sharemem/)通过通信共享内存。  
+
+- 参考文章：
+- [原文：通过通信共享内存 VS 通过共享内存来通信？](https://go.dev/blog/codelab-share)  
 

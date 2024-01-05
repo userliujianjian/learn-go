@@ -33,6 +33,8 @@
 - [内存重排](docs/goroutine/memory/memory_reordering.md)
 - [通过通信共享内存](docs/goroutine/memory/memory_communicating.md)
 - [如果对齐的内存写入是原子，为什么使用sync/atomic](docs/goroutine/memory/memory_aligned.md)
+- [Go竞争检测器（理解68%）](docs/goroutine/memory/go_race_detector.md)
+
 
 - [Go内存模型（未理解）](docs/goroutine/memory/mem.md)
 - [Go内存屏障（未理解）](docs/goroutine/memory/memory_barrier.md)

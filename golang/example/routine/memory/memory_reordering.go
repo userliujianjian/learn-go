@@ -27,7 +27,7 @@ func reordering() {
 
 }
 
-func main() {
+func main2() {
 	runtime.GOMAXPROCS(2)
 	for i := 0; i < 10000; i++ {
 		reordering()

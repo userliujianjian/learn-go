@@ -86,7 +86,7 @@ Jerry says, "Hello my name is Jerry "
 理解这种竞争的关键是了解接口在内存中的表示方式。    
 
 从概念上讲， struct接口是具有两个字段的接口。  
-![struct-field](../img/ice_cream_data_race.png)  
+![struct-field](../../img/ice_cream_data_race.png)  
 
 如果我们要描述GO中的接口， 它看起来像这样：  
 ```go
@@ -99,17 +99,17 @@ type interface struct{
 Type 只想一个结构，该结构描述实现此接口的值类型。Data指向实际值本身。这些内容和Data作为通过接口调用的任何方法的接收者传递。  
 
 对于语句var maker IceCreamMaker = ben, 编译器将生成执行一下代码操作。  
-![struct-field-2](../img/ice_cream_data_race-2.png)  
+![struct-field-2](../../img/ice_cream_data_race-2.png)  
 
 接口的字段设置为之乡\*Ben类型的定义，并且该Data Type字段包含ben的副本，即只想Ben的value值。  
 
 当执行Loop1()， maker = jerry必须更新接口值的两个字段。  
-![struct-field-3](../img/ice_cream_data_race-3.png)  
+![struct-field-3](../../img/ice_cream_data_race-3.png)  
 Type实现只想的定义\*Jerry, 并把Data指向包含Jerry实例。  
 
 Go内存模型表示，写入单个机器字将是原子的，但接口是两个字段。另一个goroutine可能会在更改接口值时观察该值的内容。这种情况下，它可能会看到类似这样的内容：  
 
-![struct-field-4](../img/ice_cream_data_race-4.png)   
+![struct-field-4](../../img/ice_cream_data_race-4.png)   
 所以Jerry Hello()的函数被调用ben为接收者。  
 
 ### **结论**  

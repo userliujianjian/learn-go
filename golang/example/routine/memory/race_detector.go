@@ -7,10 +7,10 @@ import (
 	"time"
 )
 
-func main() {
-	//example()
-	example_1_solution()
-}
+//func main() {
+//	//example()
+//	//example_1_solution()
+//}
 
 func example() {
 	done := make(chan bool)

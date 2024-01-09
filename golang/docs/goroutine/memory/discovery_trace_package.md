@@ -13,7 +13,7 @@ Go为我们提供了一个工具，可以在运行时启用跟踪，并详细了
 允许Go正确地构建每个goroutine的生命周期循环。流程如下：  
 ![trace_package_1.png](../../img/trace_package_1.png)  
 
-然后，手机的事件被推送到缓冲区，该缓冲区稍后再打到最大容量时刷新到已满缓冲列表。流程如下：  
+然后，收集的事件被推送到缓冲区，该缓冲区稍后再打到最大容量时刷新到已满缓冲列表。流程如下：  
 
 ![trace_package_2.png](../../img/trace_package_2.png)  
 
@@ -40,16 +40,19 @@ Go为我们提供了一个工具，可以在运行时启用跟踪，并详细了
 	- `GXX runtime.gcBgMarkWorker`是帮助标记内存的专用后台goroutine。  
 
 您可以在文章["Go How Does the Garbage Collector Watch Your Application?"(Go: 垃圾回收器如何监视您的应用程序？)](https://medium.com/a-journey-with-go/go-how-does-the-garbage-collector-watch-your-application-dbef99be2c35)中找到有关这些跟踪的更多信息。  
+<br>  
 
 - 但是，有些**痕迹**并不容易理解。让我们回顾一下它们以更好的理解：  
-	- `proc start` 当处理器与线程关联时调用。当启动新县城或从系统调用恢复是，就会发生这种情况  
+
+	- `proc start` 当处理器与线程关联时调用。当启动新线程或从系统调用恢复时，就会发生这种情况  <br>  
 ![trace_package_6.png](../../img/trace_package_6.png)  
-	- `proc stop` 当线程与当前处理器断开关联时调用。当线程在系统调用中被阻塞或线程退出时，就会发生这种情况。  
+	- `proc stop` 当线程与当前处理器断开关联时调用。当线程在系统调用中被阻塞或线程退出时，就会发生这种情况。 <br>   
 ![trace_package_7.png](../../img/trace_package_7.png)  
-	- `syscall` 当goroutine进行系统调用时调用：  
+	- `syscall` 当goroutine进行系统调用时调用：  <br>  
 ![trace_package_8.png](../../img/trace_package_8.png)  
-	- `unblock`当goroutine从系统调用中解封时被调用--在这种情况下，标签（sysexit）将显示在被阻塞的通道中，等等：  
+	- `unblock`当goroutine从系统调用中解封时被调用--在这种情况下，标签（sysexit）将显示在被阻塞的通道中，等等：  <br>  
 ![trace_package_9.png](../../img/trace_package_9.png)  
+<br>  
 
 跟踪可以得到增强，因为Go允许您定义和可视化自己的跟踪以及标准库中的跟踪。  
 

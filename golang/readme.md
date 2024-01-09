@@ -36,6 +36,7 @@
 - [冰激淋制造商和数据竞争](docs/goroutine/memory/data_race_ice_cream.md)
 - [冰激淋制造商和数据竞争2](docs/goroutine/memory/data_race_ice_cream-2.md)
 - [如何处理数据竞争](docs/goroutine/memory/atomic_reduce_lock.md)
+- [发现跟踪包](docs/goroutine/memory/discovery_trace_package.md)
 
 - [Go竞争检测器（理解68%）](docs/goroutine/memory/go_race_detector.md)
 - [Go内存模型（未理解）](docs/goroutine/memory/mem.md)

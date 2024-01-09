@@ -159,14 +159,65 @@ func updateByAtomic() {
 &{[20012 20013 20014 20015 20016 20017]}
 
 ```  
+
 关于生成的输出，看起来使用该atomic包的解决方案要快得多，因为它可以生成更高的数字序列。对这两个程序进行基准测试有助于找出那一个更有效。  
 
-#### 表现。
-基准测试根据测量的内容来解释。在这种情况下，我将测量以前的程序，其中有一个不断存储新配置的编写器以及不断读取它的多个读取器。为了涵盖更多潜在的情况，假设配置不经常更改，我还将包括仅具有读取器的程序的基准测试。以下是新案例：  
+#### 表现  
+基准测试根据测量的内容来解释。在这种情况下，我将测量以前的程序，其中有一个不断存储新配置的编写器以及不断读取它的多个读取器。为了涵盖更多潜在的情况，假设配置不经常更改，我还将包括仅具有读取器的程序的基准测试。以下是新案例：   
 
 ```go
+package main
 
+import (
+	"sync"
+	"sync/atomic"
+	"testing"
+)
+
+func BenchmarkMutexMultipleReaders(b *testing.B) {
+	var lastValue uint64
+	var lock sync.RWMutex
+
+	cfg := Config{
+		a: []int{0, 0, 0, 0, 0, 0},
+	}
+
+	var wg sync.WaitGroup
+	for n := 0; n < 4; n++ {
+		wg.Add(1)
+		go func() {
+			for k := 0; k < 100; k++ {
+				lock.RLock()
+				atomic.SwapUint64(&lastValue, uint64(cfg.a[0]))
+				lock.Unlock()
+			}
+			wg.Done()
+		}()
+	}
+	wg.Wait()
+}
 ```
+
+
+该基准测试证实了我们之前在性能方面所看到的情况。为了了解互斥体的平静到底在哪里，我们可以在启用追踪器的情况下冲洗运行程序。  
+有关该trace包的更多信息，我建议您阅读[文章](https://medium.com/a-journey-with-go/go-discovery-of-the-trace-package-e5a821743c3c)  
+
+这是使用该包的程序的配置文件atomic：  
+[reduce_data_race-1.png](../img/reduce-data-race-1.png)  
+
+Goroutines不间断地运行并且能够完成任务。关于带有互斥体的程序的配置文件，这是完全不同的：  
+
+[reduce_data_race-2.png](../img/reduce-data-race-2.png)  
+
+现在运行时间相当碎片化，这是由于停放goroutine的互斥体造成的。这可以从goroutine的该树种得到证实，其中显示了同步阻塞和异步阻塞话费的时间：  
+[reduce_data_race-3.png](../img/reduce-data-race-3.png)  
+
+阻塞时间大约占三分之一时间。从阻塞配置文件中可以详细了解：  
+[reduce_data_race-4.png](../img/reduce-data-race-4.png)  
+
+在这种情况下，该atomic软件包肯定会带来优势。然而，某些系统的性能可能会下降。例如： 如果您必须存储一张大地图，则每次更新地图时都必须肤质它，从而导致效率低下。  
+
+有关互斥锁的更多信息，我建议您阅读这篇[文章](https://medium.com/a-journey-with-go/go-mutex-and-starvation-3f4f4e75ad50)
 
 ```go
 

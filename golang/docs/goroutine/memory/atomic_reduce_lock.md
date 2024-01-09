@@ -189,7 +189,7 @@ func BenchmarkMutexMultipleReaders(b *testing.B) {
 			for k := 0; k < 100; k++ {
 				lock.RLock()
 				atomic.SwapUint64(&lastValue, uint64(cfg.a[0]))
-				lock.Unlock()
+				lock.RUnlock()
 			}
 			wg.Done()
 		}()

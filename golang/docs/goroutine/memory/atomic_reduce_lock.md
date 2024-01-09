@@ -203,17 +203,17 @@ func BenchmarkMutexMultipleReaders(b *testing.B) {
 有关该trace包的更多信息，我建议您阅读[文章](https://medium.com/a-journey-with-go/go-discovery-of-the-trace-package-e5a821743c3c)  
 
 这是使用该包的程序的配置文件atomic：  
-![reduce_data_race-1.png](../img/reduce-data-race-1.png)  
+![reduce_data_race-1.png](../../img/reduce-data-race-1.png)  
 
 Goroutines不间断地运行并且能够完成任务。关于带有互斥体的程序的配置文件，这是完全不同的：  
 
-![reduce_data_race-2.png](../img/reduce-data-race-2.png)  
+![reduce_data_race-2.png](../../img/reduce-data-race-2.png)  
 
 现在运行时间相当碎片化，这是由于停放goroutine的互斥体造成的。这可以从goroutine的该树种得到证实，其中显示了同步阻塞和异步阻塞话费的时间：  
-![reduce_data_race-3.png](../img/reduce-data-race-3.png)  
+![reduce_data_race-3.png](../../img/reduce-data-race-3.png)  
 
 阻塞时间大约占三分之一时间。从阻塞配置文件中可以详细了解：  
-![reduce_data_race-4.png](../img/reduce-data-race-4.png)  
+![reduce_data_race-4.png](../../img/reduce-data-race-4.png)  
 
 在这种情况下，该atomic软件包肯定会带来优势。然而，某些系统的性能可能会下降。例如： 如果您必须存储一张大地图，则每次更新地图时都必须肤质它，从而导致效率低下。  
 

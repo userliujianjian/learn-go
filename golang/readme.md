@@ -35,6 +35,7 @@
 - [如果对齐的内存写入是原子，为什么使用sync/atomic](docs/goroutine/memory/memory_aligned.md)
 - [冰激淋制造商和数据竞争](docs/goroutine/memory/data_race_ice_cream.md)
 - [冰激淋制造商和数据竞争2](docs/goroutine/memory/data_race_ice_cream-2.md)
+- [如何处理数据竞争](docs/goroutine/memory/atomic_reduce_lock.md)
 
 - [Go竞争检测器（理解68%）](docs/goroutine/memory/go_race_detector.md)
 - [Go内存模型（未理解）](docs/goroutine/memory/mem.md)

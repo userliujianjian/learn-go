@@ -32,7 +32,7 @@ func (j *Jerry2) Hello() {
 	}
 }
 
-func main() {
+func InitIceCreamMaker() {
 	//runtime.GOMAXPROCS(2)
 	var ben = &Ben2{"Ben"}
 	//var jerry = &Jerry2{&[5]byte{'J', 'e', 'r', 'r', 'y'}, 5}

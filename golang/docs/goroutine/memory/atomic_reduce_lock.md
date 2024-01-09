@@ -219,6 +219,4 @@ Goroutines不间断地运行并且能够完成任务。关于带有互斥体的�
 
 有关互斥锁的更多信息，我建议您阅读这篇[文章](https://medium.com/a-journey-with-go/go-mutex-and-starvation-3f4f4e75ad50)
 
-```go
-
-```
+- [参考原文](https://medium.com/a-journey-with-go/go-how-to-reduce-lock-contention-with-the-atomic-package-ba3b2664b549)

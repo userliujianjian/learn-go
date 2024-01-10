@@ -101,8 +101,8 @@ func updateByAtomic() {
 
 }
 
-func main() {
-	//UpdateConfig()
-	//updateConfigMutex()
-	//updateByAtomic()
-}
+//func main() {
+//	UpdateConfig()
+//	updateConfigMutex()
+//	updateByAtomic()
+//}

@@ -137,6 +137,7 @@ RWMutexWorkWrite100-6    133ns ± 1%    134ns ± 1%   +1.01%
 RWMutexWorkWrite10-6     152ns ± 0%    152ns ± 0%     ~
 ```
 
-
+#### 参考文章：  
+https://medium.com/a-journey-with-go/go-mutex-and-starvation-3f4f4e75ad50
 
 

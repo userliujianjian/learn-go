@@ -27,6 +27,7 @@
 - [并发模型之goroutine的使用时机](docs/goroutine/concurrency.md)
 - [并发模型之谁发起谁负责](docs/goroutine/concurrency-caller.md)
 - [并发模型之开启和关闭](docs/goroutine/concurrency-stop.md)
+- [通道行为哲学](docs/goroutine/channel_behavior.md)
 
 ### 内存（待进一步理解）
 - [曹大谈内存重排](docs/goroutine/memory/memory_rerange.md)

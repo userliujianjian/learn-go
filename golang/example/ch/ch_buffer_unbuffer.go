@@ -47,8 +47,8 @@ func bufferedChannel() {
 	wg.Wait()
 }
 
-func main() {
-	unbufferedChannel()
-	bufferedChannel()
-
-}
+//func main() {
+//	unbufferedChannel()
+//	bufferedChannel()
+//
+//}

@@ -1,9 +1,14 @@
 package main
 
 func main() {
-	main1()
-	main2()
-	main3()
+	//main1()
+	//main2()
+	//main3()
+	//
+	//withTimeout()
 
-	withTimeout()
+	//orderingInSelect()
+	//orderingInSelect2()
+	//selectWaiting()
+	selectOneCase()
 }

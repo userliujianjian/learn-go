@@ -1,4 +1,4 @@
-package ch
+package main
 
 //type hchan struct {
 //	// chan 元素数量

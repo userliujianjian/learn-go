@@ -28,6 +28,10 @@
 - [并发模型之谁发起谁负责](docs/goroutine/concurrency-caller.md)
 - [并发模型之开启和关闭](docs/goroutine/concurrency-stop.md)
 - [通道行为哲学](docs/ch/channel_behavior.md)
+- [通道行为](docs/ch/ch_behavior.md)
+- [Go有缓冲和无缓冲通道](docs/ch/ch_buffer_unbuffer.md)
+- [在Select语句中排序](docs/goroutine/go_select_order.md)
+
 
 ### 内存（待进一步理解）
 - [曹大谈内存重排](docs/goroutine/memory/memory_rerange.md)

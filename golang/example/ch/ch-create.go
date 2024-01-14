@@ -1,4 +1,4 @@
-package ch
+package main
 
 import (
 	"context"

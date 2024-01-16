@@ -32,7 +32,8 @@
 - [通道的本质](docs/ch/ch_nature.md)
 
 ### 语法
-- [在Select语句中排序](docs/goroutine/go_select_order.md)
+- [在Select语句中排序](docs/ch/go_select_order.md)
+- [select常见错误](docs/ch/channel_select_bug.md)
 
 
 ### 内存（待进一步理解）

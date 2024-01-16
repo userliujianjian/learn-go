@@ -1,5 +1,9 @@
 package main
 
 func main() {
-	swapState()
+	//swapState()
+	//DebugSelect()
+	//DebugSelect2()
+	debugSelectMain()
+
 }

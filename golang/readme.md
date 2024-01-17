@@ -51,6 +51,9 @@
 - [Go内存模型（未理解）](docs/goroutine/memory/mem.md)
 - [Go内存屏障（未理解）](docs/goroutine/memory/memory_barrier.md)
 
+### 场景
+- [Go高级并发](docs/scenes/concurrency_advanced.md)
+
 
 ### 标准库
 - [context使用](docs/lib/context.md)

@@ -50,8 +50,52 @@ main.main()
         /Users/slice/GolandProjects/learn-go/golang/example/acvconc/pingpong/main.go:20 +0xd1
 
 ```
-有goroutine正在运行，这是为什么呢？   
-- 我们来看看player函数，函数中有一个for循环，导致panic主程序退出后goroutine依然一直在系统中运行
+思考下player函数中的for循环退出了嘛？   
+- 我们来看看player函数，函数中有一个for循环，导致panic主程序退出后，play函数所在goroutine依然一直在系统中运行
+
+
+#### select 遇到nil会进入case嘛？
+
+```go
+package main
+
+import (
+	"fmt"
+	"math/rand"
+	"time"
+)
+
+func init() {
+	rand.Seed(time.Now().UnixNano())
+}
+
+func main() {
+	a, b := make(chan string), make(chan string)
+	go func() { a <- "a" }()
+	go func() { b <- "b" }()
+	if rand.Intn(2) == 0 {
+		a = nil // HL
+		fmt.Println("nil a")
+	} else {
+		b = nil // HL
+		fmt.Println("nil b")
+	}
+	select {
+	case s := <-a:
+		fmt.Println("got", s)
+	case s := <-b:
+		fmt.Println("got", s)
+	}
+}
+```
+
+打印结果：  
+```bash
+nil a
+got b
+```
+
+- 当case对应的通道为nil时，不会触发case运行
 
 #### **总结：**    
 - 开启goroutine非常容易，但怎么停下来呢？
@@ -74,4 +118,4 @@ select{
 
 
 
-#### 让我们来看
+#### 参考原文：https://go.dev/blog/io2013-talk-concurrency

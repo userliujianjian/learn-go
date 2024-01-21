@@ -24,12 +24,15 @@
 - [Goroutine泄漏](docs/ch/channel-buf.md)
 - [Goroutine泄漏2](docs/goroutine/concurrency-trap-2.md)
 - [Goroutine和GOMAXPROCS](docs/goroutine/goroutines-and-gomaxprocs.md)
-- [并发模型之goroutine的使用时机](docs/goroutine/concurrency.md)
-- [并发模型之谁发起谁负责](docs/goroutine/concurrency-caller.md)
-- [并发模型之开启和关闭](docs/goroutine/concurrency-stop.md)
 - [通道行为哲学](docs/ch/channel_behavior.md)
 - [Go有缓冲和无缓冲通道](docs/ch/ch_buffer_unbuffer.md)
 - [通道的本质](docs/ch/ch_nature.md)
+
+### 并发
+- [并发模型之goroutine的使用时机](docs/goroutine/concurrency.md)
+- [并发模型之谁发起谁负责](docs/goroutine/concurrency-caller.md)
+- [并发模型之开启和关闭](docs/goroutine/concurrency-stop.md)
+- [并发模式之超时继续](docs/goroutine/concurrency_timeout.md)
 
 ### 语法
 - [在Select语句中排序](docs/ch/go_select_order.md)

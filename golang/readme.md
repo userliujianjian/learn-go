@@ -34,6 +34,7 @@
 - [并发模型之开启和关闭](docs/goroutine/concurrency-stop.md)
 - [并发模式之超时继续](docs/goroutine/concurrency_timeout.md)
 - [GO并发模式：管道和取消(待复读)](docs/goroutine/concurrency_pipeline.md)
+- [GO高级并发模式：通道（第三部分）](docs/goroutine/advanced_concurrency-part3.md)
 
 ### 语法
 - [在Select语句中排序](docs/ch/go_select_order.md)

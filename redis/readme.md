@@ -10,5 +10,5 @@
 
 ### 集群
 - [Redis集群中的纪元](docs/redis_epoch.md)
-
+- [Redis Cluster Gossip协议](docs/redis-gossip.md)
 

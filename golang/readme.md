@@ -56,6 +56,9 @@
 - [Go内存模型（未理解）](docs/goroutine/memory/mem.md)
 - [Go内存屏障（未理解）](docs/goroutine/memory/memory_barrier.md)
 
+### 分布式
+- [新哈希算法改进负载均衡](docs/distributed/load-balancing-with-hashing.md)
+
 ### 场景
 - [Go高级并发](docs/scenes/concurrency_advanced.md)
 - [Go上下文之取消](docs/scenes/go-context.md)

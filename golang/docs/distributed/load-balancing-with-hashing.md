@@ -71,4 +71,5 @@ Vimeo的视频文件存储为MP4文件，与浏览器中下载或“渐进”播
 
 总而言之，我很高兴看到一点点算法工作如何将单点故障变得更好
 
+- 原文：https://medium.com/vimeo-engineering-blog/improving-load-balancing-with-a-new-consistent-hashing-algorithm-9f1bd75709ed
 

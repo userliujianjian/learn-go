@@ -52,7 +52,7 @@ type cancelCtx struct {
 该字段`children`跟踪从此上下文创建的所有子项，同时`Context`指向从中创建当前子项的上下文。  
 
 以下是创建一些上下文的子上下文的实例：  
-![content-1](../img/context-tree-1.png)  
+![content-1](../../img/context-tree-1.png)  
 
 每个上下文都是互相链接的，如果我们取消主“C”上下文，所有的子项也会被取消。Go循环对子项进行逐个取消：  
 ```go
@@ -69,14 +69,14 @@ func(c *cancelCtx)cancel(removeFromParent bool, err error){
 
 **取消会下降，并且永远不会通知家长**。如果我们取消C1，它只会通知C11和C12:  
 
-![content-2](../img/context-tree-2.png)  
+![content-2](../../img/context-tree-2.png)  
 
 这种取消传播是我们能够定义更高级的案例，这些案例可以帮助我们根据主要上下文处理多个/繁重的工作。  
 
 #### 取消传播  
 
 让我们锯割简单的例子，通过2个goroutine（A和B）取消过程，他们将并行工作，如果由于通用上下文而发生错误，则取消另一个程序的工作：  
-![content-3](../img/context-tree-3.png)  
+![content-3](../../img/context-tree-3.png)  
 
 如果没有发生任何错误，每个过程都会正常工作。我在每个作业上都添加了一个跟踪，这将是我们能够看到一棵小树：  
 ```bash
@@ -104,7 +104,7 @@ B - 200ms
 
 正如我们所看到的，当B2和B21被取消时，A12会中断，以避免进行不必要的工作：  
 
-![content-4](../img/context-tree-4.png)  
+![content-4](../../img/context-tree-4.png)  
 
 我们在这里可以看到，上下文对于多个goroutine是安全的。事实上，这要归功于我们之前在结构中看到的互斥锁，它保证了对上下文的并发安全访问。  
 

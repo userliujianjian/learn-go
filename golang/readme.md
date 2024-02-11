@@ -65,10 +65,10 @@
 
 
 ### 标准库
-- [context使用](docs/lib/context.md)
-- [context源码](docs/lib/context-2.md)
-- [Go上下文之取消](docs/lib/go-context.md)
-- [Go1.7中 context.Value从了解到放弃](docs/lib/context-used.md)
+- [context使用](docs/lib/context/context.md)
+- [context源码](docs/lib/context/context-2.md)
+- [Go上下文之取消](docs/lib/context/go-context.md)
+- [Go1.7中 context.Value从了解到放弃](docs/lib/context/context-used.md)
 
 ### 解释器
 - [GMP](docs/schedule/gmp.md)

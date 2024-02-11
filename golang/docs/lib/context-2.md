@@ -131,7 +131,7 @@ func main(){
 ```
 
 context包的核心是`context.Context`接口，另外有四个 struct实现了Context接口，分别是EmptyCtx，CancelCtx, timerCtx, valueCtx,其中emptyCtx是一个默认的空结构体，其余三个都是在其基础上添加了各种功能的实现，针对emptyCtx，context包中暴露了两个方法Background()和TODO()去创建一个空的emptyCtx，而针对后面三种具体的struct，context包总共暴露了四个方法去产生对应的struct，分别是： `WithCancel()`,`WithDeadLine()`,`WithTimeout()`,`WithValue()` 对应关系如下：
-![content对应关系](../img/context-2.png)
+![content对应关系](../../img/context-2.png)
 
 ### TODO和Background
 TODO和Backgroupnd方法用来返回一个emptyCtx类型，他们在实现上都一样：

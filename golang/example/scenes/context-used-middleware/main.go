@@ -18,17 +18,17 @@ func addUserID(rw http.ResponseWriter, req *http.Request, next http.Handler) {
 	next.ServeHTTP(rw, req)
 }
 
-func userUserID(rw http.ResponseWriter, req *http.Request, next http.Handler) {
-	uid := req.Context().Value("userid")
-	rw.Write([]byte(uid))
-}
+//func userUserID(rw http.ResponseWriter, req *http.Request, next http.Handler) {
+//	uid := req.Context().Value("userid")
+//	rw.Write([]byte(uid))
+//}
 
 func makeChain(chain ...HandlerMiddleware) http.Handler { return nil }
 
 type Server struct{}
 
-func (s *Server) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
-	req = req.WithContext(context.Background())
-	chain := makeChain(addUserID, function1, function2, useUserID)
-	chain.ServeHTTP(rw, req)
-}
+//func (s *Server) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
+//	req = req.WithContext(context.Background())
+//	chain := makeChain(addUserID, function1, function2, useUserID)
+//	chain.ServeHTTP(rw, req)
+//}

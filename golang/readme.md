@@ -61,6 +61,7 @@
 
 ### 场景
 - [Go高级并发](docs/scenes/concurrency_advanced.md)
+- [浅谈分布式存储系统数据分布方法](docs/scenes/distributed-1.md)
 
 
 

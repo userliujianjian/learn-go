@@ -62,7 +62,7 @@
 ### 场景
 - [Go高级并发](docs/scenes/concurrency_advanced.md)
 - [浅谈分布式存储系统数据分布方法](docs/scenes/distributed-1.md)
-
+- [一致性哈希算法- 问题的提出](docs/scenes/distributed-hash-1.md)
 
 
 ### 标准库

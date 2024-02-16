@@ -30,3 +30,7 @@ func main(w http.ResponseWriter, r *http.Request) {
 
 	// .... 业务代码
 }
+
+func test() {
+
+}

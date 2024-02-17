@@ -58,11 +58,13 @@
 
 ### 分布式
 - [新哈希算法改进负载均衡](docs/distributed/load-balancing-with-hashing.md)
+- [Seata实战-分布式事务](docs/distributed/distributed-seata.md)
 
 ### 场景
 - [Go高级并发](docs/scenes/concurrency_advanced.md)
 - [浅谈分布式存储系统数据分布方法](docs/scenes/distributed-1.md)
 - [一致性哈希算法- 问题的提出](docs/scenes/distributed-hash-1.md)
+
 
 
 ### 标准库

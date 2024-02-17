@@ -92,7 +92,7 @@ public void changeSal(string fromUserName, String toUserName, int changeSal){
 #### TCC 基本原理  
 TCC将事物提交分为Try-confirm-cancel3个操作。其和两阶段提交有点类似，Try为第一阶段，confirm-cancel为第二阶段，是一种应用层面侵入业务的两阶段提交。  
 
-| 操作方法 | 含义｜
+| 操作方法 | 含义|
 | ---- | ---- |
 | Try | 预留业务资源/数据校验 |
 | Confirm | 确认执行业务操作，实际提交数据，不做任何业务检查，try成功，confirm必定成功，需保证幂等 |
@@ -112,8 +112,8 @@ ServiceA，ServiceB，OrderService都需分别实现try()，confirm()，cancle()
 |  | ServiceA | ServiceB | OrderService |
 | ---- | ---- | ---- | ---- |
 | try() | 校验余额(并发控制) \n 冻结余额+1000 \n 余额-1000 | 冻结金额+1000 | 创建转账订单，状态：待转账 |
-| confirm() | 冻结余额 -1000 | 余额+1000 \n 冻结金额-1000 ｜ 状态变为转账成功 |
-| cancel() | 冻结金额-1000 \n 余额 +1000 | 冻结余额 -1000 ｜ 状态变为转账失败 ｜
+| confirm() | 冻结余额 -1000 | 余额+1000 \n 冻结金额-1000 | 状态变为转账成功 |
+| cancel() | 冻结金额-1000 \n 余额 +1000 | 冻结余额 -1000 | 状态变为转账失败 |
 
 其中业务调用方BusinessService中就需要调用  
 ServiceA.try()  

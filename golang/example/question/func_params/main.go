@@ -2,19 +2,19 @@ package main
 
 import "fmt"
 
-func initMapData(data map[string]string) map[string]string {
+func initMapData(data map[string]string) {
 	data["age"] = ""
 	data["name"] = ""
 	data["sex"] = ""
 	data["school"] = ""
-	return data
+	return
 }
 
 // 测试字典作为参数传递运行结果会如何
 func main() {
 	info := make(map[string]string)
 	fmt.Println("step1 info Length: ", len(info))
-	info = initMapData(info)
+	initMapData(info)
 	fmt.Println("step2 info length", len(info))
 
 	infoV2 := make(map[string]string)

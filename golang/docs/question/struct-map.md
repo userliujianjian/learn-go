@@ -100,7 +100,36 @@ type hmap struct {
 ```  
 
 `清单3`中结构体`hmap`就是map的底层数据结构，其中`buckets`,`oldbuckets`是指针格式，并且装map实际的数据。   
-根据`函数参数是值传递`规则来看，当map作为参数时，给`initMapData`函数传递的确实是hmap的副本，`buckets`,`oldbuckets`等指针指值并未被改变。 所以在函数`initMapData`函数中，**新增的key实际上改变了`buckets`,`oldbuckets`指针指向存储的数据，地址并没哟被改变**。同理也就能理解为什么**清单2中infoV2及时没接收函数返回值，长度也变为4的原因**。
+根据`函数参数是值传递`规则来看，当map作为参数时，给`initMapData`函数传递的确实是hmap的副本，`buckets`,`oldbuckets`等指针指值并未被改变。 所以在函数`initMapData`函数中，**新增的key实际上改变了`buckets`,`oldbuckets`指针指向存储的数据，地址并没哟被改变**。同理也就能理解为什么**清单2中infoV2即使没接收函数返回值，长度也变为4的原因**。  
+最终我们的代码可以写成如下：
+```go
+package main
+
+import "fmt"
+
+func initMapData(data map[string]string) {
+    data["age"] = ""
+    data["name"] = ""
+    data["sex"] = ""
+    data["school"] = ""
+    return
+}
+
+// 测试字典作为参数传递运行结果会如何
+func main() {
+    info := make(map[string]string)
+    fmt.Println("step1 info Length: ", len(info))
+    initMapData(info)
+    fmt.Println("step2 info length", len(info))
+
+    infoV2 := make(map[string]string)
+    fmt.Println("step3 infoV2 Length: ", len(infoV2))
+    initMapData(infoV2)
+    fmt.Println("step4 infoV2 length", len(infoV2))
+}
+
+```
+- 总结
 
 
 

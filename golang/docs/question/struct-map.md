@@ -102,6 +102,8 @@ type hmap struct {
 `清单3`中结构体`hmap`就是map的底层数据结构，其中`buckets`,`oldbuckets`是指针格式，并且装map实际的数据。   
 根据`函数参数是值传递`规则来看，当map作为参数时，给`initMapData`函数传递的确实是hmap的副本，`buckets`,`oldbuckets`等指针指值并未被改变。 所以在函数`initMapData`函数中，**新增的key实际上改变了`buckets`,`oldbuckets`指针指向存储的数据，地址并没哟被改变**。同理也就能理解为什么**清单2中infoV2即使没接收函数返回值，长度也变为4的原因**。  
 最终我们的代码可以写成如下：
+
+- 清单4  
 ```go
 package main
 
@@ -129,8 +131,77 @@ func main() {
 }
 
 ```
-- 总结
+一维字典传给函数`initMapData` 初始化，在函数内对字典进行更新，会同时更新函数外的变量值。
+那二维的字典，在函数内更新，会不会影响到函数外的变量呢？
 
+- 清单5  
+```go   
+package main
+
+import (
+    "fmt"
+)
+
+func initMapData(data map[string]string) {
+    data["age"] = ""
+    data["name"] = ""
+    data["sex"] = ""
+    data["school"] = ""
+    return
+}
+
+func initTwoDimensional(data map[string]map[string]string) {
+    data["v1"] = make(map[string]string)
+    data["v1"]["age"] = ""
+    data["v1"]["name"] = ""
+    data["v1"]["sex"] = ""
+    data["v1"]["school"] = ""
+    data["v2"] = make(map[string]string)
+    data["v2"]["age"] = ""
+    data["v2"]["name"] = ""
+    data["v2"]["sex"] = ""
+    data["v2"]["school"] = ""
+}
+
+// 测试字典作为参数传递运行结果会如何
+func main() {
+    info := make(map[string]string)
+    fmt.Println("step1 info Length: ", len(info))
+    initMapData(info)
+    fmt.Println("step2 info length", len(info))
+
+    infoV2 := make(map[string]string)
+    fmt.Println("step3 infoV2 Length: ", len(infoV2))
+    initMapData(infoV2)
+    fmt.Println("step4 infoV2 length", len(infoV2))
+
+    //dimensional
+    twoDimensional := make(map[string]map[string]string)
+    fmt.Println("step5 twoDimensional Length: ", len(twoDimensional))
+    initTwoDimensional(twoDimensional)
+    fmt.Println("step6 twoDimensional Length: ", len(twoDimensional))
+    for k, v := range twoDimensional {
+        fmt.Println("step7 twoDimensional key: ", k, "length: ", len(v))
+    }
+
+}
+```   
+输出： 
+```text
+step1 info Length:  0
+step2 info length 4
+step3 infoV2 Length:  0
+step4 infoV2 length 4
+step5 twoDimensional Length:  0
+step6 twoDimensional Length:  2
+step7 twoDimensional key:  v1 length:  4
+step7 twoDimensional key:  v2 length:  4
+
+```   
+从`清单5`输出的step6、step7中可以看出，一维的key `v1、v2`下的键值都被同步到源变量`twoDimensional`上了。 
+
+- 总结  
+本文主要围绕`**Golang函数参数是值传递**`规则，将字典作为参数，做了几个实验。__虽然在函数中修改字典变量，会影响到函数外的变量__ ，**但依然符合Golang是值传递的规则** , 之所以被改变是因为字典本身数据不在 `map`的结构上，`hmap`只是存储的真实数据对应的地址(`buckets`,`oldbuckets`). 感兴趣的话，大家可以继续看看Golang map的底层数据结构。 下一篇我依然会围绕`值传递`的话题，去看看切片的表现。  
 
 
 

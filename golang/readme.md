@@ -36,6 +36,7 @@
 - [GO并发模式：管道和取消(待复读)](docs/goroutine/concurrency_pipeline.md)
 - [GO高级并发模式：通道（第三部分）](docs/goroutine/advanced_concurrency-part3.md)
 - [GO线程池）](docs/concurrent/thread_pooling.md)
+- [GO编程中的线程池）](docs/goroutine/pool/thread-pooling-in-go-programming.md)
 
 ### 语法
 - [在Select语句中排序](docs/ch/go_select_order.md)

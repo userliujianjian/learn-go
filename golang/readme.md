@@ -82,3 +82,6 @@
 
 ### 常见面试题
 - [概念题](docs/ch/ch-question.md)
+- [值传递]
+	- [字典](docs/question/struct-map.md)
+	- [切片](docs/question/struct-slice.md)
